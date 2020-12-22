@@ -16,12 +16,16 @@ const proxy = new Proxy(library, {
     get(target, book) {
         for( value of target) {
             if ( value.book === book) {
-                return value.book
+                return value.book.split(' ').map(word => word[0].toUpperCase() + word.substring(1)).join(' ')
             }
             else { 
                 alert('Такой книги НЭМА((') }
         }
     }
   });
+  
 
  console.log(proxy['колобок']);
+
+
+
