@@ -12,8 +12,6 @@ let library = [{ book: 'красная шапочка' },
             { book: 'лиса и журавль' },
 ];
 
-//============================================================================
-
 const proxy = new Proxy(library, {
     get(target, book) {
         for( value of target) {
@@ -24,9 +22,6 @@ const proxy = new Proxy(library, {
         alert('Такой книги НЭМА((') 
     },
   
-
-// ==============================================================================
-
 set(target, prop, value) {
     for (val of target) {
       if (value === value.book) {
@@ -37,6 +32,8 @@ set(target, prop, value) {
     return target.push({ book: value.toLowerCase() });
   }
 })
+
 console.log(proxy['колобок']);
 proxy.newBook = "морозко";
 console.log(proxy)
+console.log(proxy['сказка о золотой рыбке'])
