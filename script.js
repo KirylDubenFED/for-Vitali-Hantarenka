@@ -10,22 +10,33 @@ let library = [{ book: 'красная шапочка' },
             { book: 'три поросенка' },
             { book: 'марья искусница' },
             { book: 'лиса и журавль' },
-]
+];
+
+//============================================================================
 
 const proxy = new Proxy(library, {
     get(target, book) {
         for( value of target) {
             if ( value.book === book) {
                 return value.book.split(' ').map(letter => letter[0].toUpperCase() + letter.substring(1)).join(' ')
-            }
-            else { 
-                alert('Такой книги НЭМА((') }
+            }     
         }
-    }
-  });
+        alert('Такой книги НЭМА((') 
+    },
   
 
- console.log(proxy['колобок']);
+// ==============================================================================
 
-
-
+set(target, prop, value) {
+    for (val of target) {
+      if (value === value.book) {
+        alert("Такое уже есть");
+        return;
+      }
+    }
+    return target.push({ book: value.toLowerCase() });
+  }
+})
+console.log(proxy['колобок']);
+proxy.newBook = "морозко";
+console.log(proxy)
